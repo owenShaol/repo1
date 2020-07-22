@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owen.dao.RoleDao">
+    <select id="findRolesByUid" parameterType="java.lang.Integer" resultType="com.owen.pojo.Role">
+        SELECT r.*
+    FROM
+    t_user u
+    join t_user_role ur
+    ON u.id=ur.user_id
+    join t_role r
+    on r.id=ur.role_id
+    where u.id=#{value}
+    </select>
+
+</mapper>

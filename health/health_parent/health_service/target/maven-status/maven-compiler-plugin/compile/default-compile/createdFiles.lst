@@ -1,0 +1,13 @@
+com\owen\service\impl\CheckGroupServiceImpl.class
+com\owen\dao\SetMealDao.class
+com\owen\dao\PermissionDao.class
+com\owen\service\impl\OrderSettingServiceImpl.class
+com\owen\dao\RoleDao.class
+com\owen\dao\CheckItemDao.class
+com\owen\dao\OrderDao.class
+com\owen\dao\UserDao.class
+com\owen\dao\CheckGroupDao.class
+com\owen\service\impl\UserServiceImpl.class
+com\owen\service\impl\CheckItemServiceImpl.class
+com\owen\service\impl\SetMealServiceImpl.class
+com\owen\dao\OrderSettingDao.class

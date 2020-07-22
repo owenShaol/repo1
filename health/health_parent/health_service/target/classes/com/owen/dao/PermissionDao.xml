@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owen.dao.PermissionDao">
+<select id="findPermissionByRid" parameterType="java.lang.Integer" resultType="com.owen.pojo.Permission">
+    SELECT
+	p.*
+    FROM
+	t_role r
+    JOIN t_role_permission rp ON r.id = rp.role_id
+    JOIN t_permission p ON p.id = rp.permission_id
+    WHERE
+	r.id = #{value }
+</select>
+</mapper>

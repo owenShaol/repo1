@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owen.dao.CheckGroupDao">
+    <!--    分页查询-->
+    <select id="findPage" parameterType="java.lang.String" resultType="com.owen.pojo.CheckGroup">
+        select * from t_checkgroup
+        <if test="value != null and value.length >0">
+            where code=#{value} or name =#{value} or helpCode =#{value}
+        </if>
+    </select>
+    <!--    新增检查组-->
+    <insert id="add" parameterType="com.owen.pojo.CheckGroup">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into t_checkgroup(code,name,helpCode,sex,remark,attention)
+        values
+        (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
+    </insert>
+    <!--    新增关系-->
+    <insert id="addItemAndGroup" parameterType="java.util.Map">
+        insert into  t_checkgroup_checkitem
+        (checkgroup_id,checkitem_id)
+        values
+        (#{checkGroupId},#{checkItemId})
+    </insert>
+    <!--    查询对应关系的item的ids-->
+    <select id="findItemIds" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select checkitem_id from   t_checkgroup_checkitem where  checkgroup_id=#{value}
+    </select>
+<!--    delete-->
+    <delete id="deleteGroup" parameterType="java.lang.Integer">
+        delete from t_checkgroup
+        where id=#{value }
+    </delete>
+<!--    delete item id-->
+    <delete id="deleteItemId" parameterType="java.lang.Integer">
+        delete from  t_checkgroup_checkitem
+        where  checkgroup_id=#{value}
+    </delete>
+<!--    update-->
+    <update id="update" parameterType="com.owen.pojo.CheckGroup">
+        update t_checkgroup
+        set
+        code=#{code},name=#{name},helpCode=#{helpCode},sex=#{sex},remark=#{remark},attention=#{attention}
+        where id=#{id}
+
+    </update>
+<!--    findAll-->
+    <select id="findAll" resultType="com.owen.pojo.CheckGroup">
+        select * from t_checkgroup
+    </select>
+<!--    findItems-->
+    <select id="findItems" resultType="com.owen.pojo.CheckItem" parameterType="java.lang.Integer">
+        SELECT
+	        i.*
+        FROM
+	    t_checkgroup g
+        JOIN t_checkgroup_checkitem gi ON g.id = gi.checkgroup_id
+        JOIN t_checkitem i ON gi.checkitem_id = i.id
+        WHERE
+	    g.id = #{value}
+    </select>
+
+</mapper>
